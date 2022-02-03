@@ -11,12 +11,12 @@
 JQ3AudioProcessor::JQ3AudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
     : AudioProcessor(BusesProperties()
-#if ! JucePlugin_IsMidiEffect
-#if ! JucePlugin_IsSynth
-    .withInput("Input", juce::AudioChannelSet::stereo(), true)
-#endif
-    .withOutput("Output", juce::AudioChannelSet::stereo(), true)
-#endif
+    #if ! JucePlugin_IsMidiEffect
+    #if ! JucePlugin_IsSynth
+        .withInput("Input", juce::AudioChannelSet::stereo(), true)
+    #endif
+        .withOutput("Output", juce::AudioChannelSet::stereo(), true)
+    #endif
     )
 #endif
 {
@@ -107,17 +107,12 @@ void JQ3AudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 
     auto chainSettings = getChainSettings(apvts);
 
-    auto peakCoefficients = juce::dsp::IIR::Coefficients<float>::makePeakFilter(sampleRate,
-        chainSettings.peakFreq,
-        chainSettings.peakQuality,
-        juce::Decibels::decibelsToGain(chainSettings.peakGainInDecibels));
-
-    *leftChain.get<ChainPositions::Peak>().coefficients = *peakCoefficients;
-    *rightChain.get<ChainPositions::Peak>().coefficients = *peakCoefficients;
+    updatePeakFilter(chainSettings);
 
     auto cutCoefficients = juce::dsp::FilterDesign<float>::designIIRHighpassHighOrderButterworthMethod(chainSettings.lowCutFreq,
         sampleRate,
         2 * (chainSettings.lowCutSlope + 1));
+    
     auto& leftLowCut = leftChain.get<ChainPositions::LowCut>();
 
     leftLowCut.setBypassed<0>(true);
@@ -261,6 +256,8 @@ void JQ3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::Mid
         buffer.clear(i, 0, buffer.getNumSamples());
 
     auto chainSettings = getChainSettings(apvts);
+
+    updatePeakFilter(chainSettings);
 
     auto peakCoefficients = juce::dsp::IIR::Coefficients<float>::makePeakFilter(getSampleRate(),
         chainSettings.peakFreq,
@@ -418,6 +415,22 @@ ChainSettings getChainSettings(juce::AudioProcessorValueTreeState& apvts)
     settings.highCutSlope = static_cast<Slope>(apvts.getRawParameterValue("HighCut Slope")->load());
 
     return settings;
+}
+
+void JQ3AudioProcessor::updatePeakFilter(const ChainSettings& chainSettings)
+{
+    auto peakCoefficients = juce::dsp::IIR::Coefficients<float>::makePeakFilter(getSampleRate(),
+        chainSettings.peakFreq,
+        chainSettings.peakQuality,
+        juce::Decibels::decibelsToGain(chainSettings.peakGainInDecibels));
+
+    updateCoefficients(leftChain.get<ChainPositions::Peak>().coefficients, peakCoefficients);
+    updateCoefficients(rightChain.get<ChainPositions::Peak>().coefficients, peakCoefficients);
+}
+
+void JQ3AudioProcessor::updateCoefficients(Coefficients& old, const Coefficients& replacements)
+{
+    *old = *replacements;
 }
 
 juce::AudioProcessorValueTreeState::ParameterLayout JQ3AudioProcessor::createParameterLayout()
