@@ -1,8 +1,6 @@
 /*
   ==============================================================================
-
     This file contains the basic framework code for a JUCE plugin editor.
-
   ==============================================================================
 */
 
@@ -14,14 +12,14 @@
 //==============================================================================
 /**
 */
-class JQ3AudioProcessorEditor  : public juce::AudioProcessorEditor
+class JQ3AudioProcessorEditor : public juce::AudioProcessorEditor
 {
 public:
-    JQ3AudioProcessorEditor (JQ3AudioProcessor&);
+    JQ3AudioProcessorEditor(JQ3AudioProcessor&);
     ~JQ3AudioProcessorEditor() override;
 
     //==============================================================================
-    void paint (juce::Graphics&) override;
+    void paint(juce::Graphics&) override;
     void resized() override;
 
 private:
@@ -29,5 +27,5 @@ private:
     // access the processor object that created it.
     JQ3AudioProcessor& audioProcessor;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (JQ3AudioProcessorEditor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(JQ3AudioProcessorEditor)
 };
