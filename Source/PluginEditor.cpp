@@ -21,16 +21,29 @@ JQ3AudioProcessorEditor::JQ3AudioProcessorEditor(JQ3AudioProcessor& p)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    setSize(600, 400);
-
     for (auto* comp : getComps())
     {
         addAndMakeVisible(comp);
     }
+
+    const auto& params = audioProcessor.getParameters();
+    for (auto param : params)
+    {
+        param->addListener(this);
+    }
+
+    startTimerHz(60);
+
+    setSize(600, 400);
 }
 
 JQ3AudioProcessorEditor::~JQ3AudioProcessorEditor()
 {
+    const auto& params = audioProcessor.getParameters();
+    for (auto param : params)
+    {
+        param->removeListener(this);
+    }
 }
 
 //==============================================================================
@@ -139,8 +152,14 @@ void JQ3AudioProcessorEditor::timerCallback()
 {
     if (parametersChanged.compareAndSetBool(false, true))
     {
+        DBG("Params changed");
         // update monochain
+        auto chainSettings = getChainSettings(audioProcessor.apvts);
+        auto peakCoefficients = makePeakFilter(chainSettings, audioProcessor.getSampleRate());
+        updateCoefficients(monoChain.get<ChainPositions::Peak>().coefficients, peakCoefficients);
+
         // signal a repaint
+        repaint();
     }
 }
 
