@@ -19,8 +19,6 @@ struct CustomRotarySlider : juce::Slider
 };
 
 //==============================================================================
-/**
-*/
 class JQ3AudioProcessorEditor : public juce::AudioProcessorEditor, 
     juce::AudioProcessorParameter::Listener,
     juce::Timer
