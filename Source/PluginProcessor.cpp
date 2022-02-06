@@ -106,6 +106,9 @@ void JQ3AudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
     rightChain.prepare(spec);
 
     updateFilters();
+
+    leftChannelFifo.prepare(samplesPerBlock);
+    rightChannelFifo.prepare(samplesPerBlock);
 }
 
 void JQ3AudioProcessor::releaseResources()
@@ -171,6 +174,9 @@ void JQ3AudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::Mid
 
     leftChain.process(leftContext);
     rightChain.process(rightContext);
+
+    leftChannelFifo.update(buffer);
+    rightChannelFifo.update(buffer);
 }
 
 //==============================================================================
