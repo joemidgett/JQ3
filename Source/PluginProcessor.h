@@ -20,10 +20,24 @@ struct Fifo
 {
     void prepare(int numChannels, int numSamples)
     {
+        static_assert(std::is_same_v<T, juce::AudioBuffer<float>>,
+            "prepare(numChannels, numSamples) should only be used when the Fifo is holding juce::AudioBuffer<float>");
         for (auto& buffer : buffers)
         {
             buffer.setSize(numChannels, numSamples, false, true, true);
             buffer.clear();
+        }
+    }
+
+    void prepare(size_t numElements)
+    {
+        static_assert(std::is_same_v<T, std::vector<float>>,
+            "prepare(numElements) should only be used when the Fifo is holding std::vector<float>");
+        
+        for (auto& buffer : buffers)
+        {
+            buffer.clear();
+            buffer.resize(numElements, 0);
         }
     }
 
@@ -53,7 +67,7 @@ struct Fifo
 
     int getNumAvailableForReading() const
     {
-        fifo.getNumReady();
+        return fifo.getNumReady();
     }
 
 private:
