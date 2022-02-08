@@ -237,6 +237,11 @@ struct ResponseCurveComponent : juce::Component,
 
     void resized() override;
 
+    void toggleAnalysisEnablement(bool enabled)
+    {
+        shouldShowFFTAnalysis = enabled;
+    }
+
 private:
     JQ3AudioProcessor& audioProcessor;
     juce::Atomic<bool> parametersChanged { false };
@@ -252,6 +257,8 @@ private:
     juce::Rectangle<int> getAnalysisArea();
 
     PathProducer leftPathProducer, rightPathProducer;
+
+    bool shouldShowFFTAnalysis = true;
 };
 
 //==============================================================================
