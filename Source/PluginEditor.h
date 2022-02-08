@@ -97,7 +97,7 @@ struct AnalyzerPathGenerator
     {
         auto top = fftBounds.getY();
         auto bottom = fftBounds.getHeight();
-        auto width = fftBounds.getWidth();
+        auto width = fftBounds.getWidth() - 15;
 
         int numBins = (int)fftSize / 2;
 
@@ -111,7 +111,9 @@ struct AnalyzerPathGenerator
 
         auto y = map(renderData[0]);
 
-        jassert(!std::isnan(y) && !std::isinf(y));
+        // jassert(!std::isnan(y) && !std::isinf(y));
+        if (std::isnan(y) || std::isinf(y))
+            y = bottom;
 
         p.startNewSubPath(0, y);
 
@@ -121,7 +123,7 @@ struct AnalyzerPathGenerator
         {
             y = map(renderData[binNum]);
 
-            jassert(!std::isnan(y) && !std::isinf(y));
+            // jassert(!std::isnan(y) && !std::isinf(y));
 
             if (!std::isnan(y) && !std::isinf(y));
             {

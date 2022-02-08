@@ -228,7 +228,7 @@ juce::String RotarySliderWithLabels::getDisplayString() const
 // ==============================================================================
 ResponseCurveComponent::ResponseCurveComponent(JQ3AudioProcessor& p) :
     audioProcessor(p),
-    // leftChannelFifo(&audioProcessor.leftChannelFifo)
+
     leftPathProducer(audioProcessor.leftChannelFifo),
     rightPathProducer(audioProcessor.rightChannelFifo)
 {
@@ -521,7 +521,7 @@ void ResponseCurveComponent::resized()
         r.setCentre(x, 0);
         r.setY(1);
 
-        g.drawFittedText(str, r, juce::Justification::centred, 1);
+        g.drawFittedText(str, r, juce::Justification::centredLeft, 1);
     }
 
     for (auto gDb : gain)
@@ -704,6 +704,7 @@ void JQ3AudioProcessorEditor::resized()
     // subcomponents in your editor..
 
     auto bounds = getLocalBounds();
+    bounds.removeFromTop(4);
 
     auto analyzerEnabledArea = bounds.removeFromTop(25);
     analyzerEnabledArea.setWidth(100);
