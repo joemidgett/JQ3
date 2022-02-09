@@ -521,7 +521,7 @@ void ResponseCurveComponent::resized()
         r.setCentre(x, 0);
         r.setY(1);
 
-        g.drawFittedText(str, r, juce::Justification::centredLeft, 1);
+        g.drawFittedText(str, r, juce::Justification::centred, 1);
     }
 
     for (auto gDb : gain)
@@ -560,7 +560,7 @@ juce::Rectangle<int> ResponseCurveComponent::getRenderArea()
     auto bounds = getLocalBounds();
 
     bounds.removeFromTop(12);
-    bounds.removeFromBottom(2);
+    bounds.removeFromBottom(1);
     bounds.removeFromLeft(20);
     bounds.removeFromRight(20);
 
