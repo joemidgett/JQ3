@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="gelPKp" name="JQ3" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" cppLanguageStandard="17">
+              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" cppLanguageStandard="17"
+              companyName="Joe Midgett">
   <MAINGROUP id="nvzyJg" name="JQ3">
     <GROUP id="{67380ACD-07C1-A876-503A-81562B06CDDB}" name="Source">
       <FILE id="ImnKyc" name="PluginProcessor.cpp" compile="1" resource="0"
