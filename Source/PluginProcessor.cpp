@@ -259,8 +259,8 @@ void JQ3AudioProcessor::updatePeakFilter(const ChainSettings& chainSettings)
 {
     auto peakCoefficients = makePeakFilter(chainSettings, getSampleRate());
 
-    leftChain.setBypassed<ChainPositions::Peak>(chainSettings.lowCutBypassed);
-    rightChain.setBypassed<ChainPositions::Peak>(chainSettings.lowCutBypassed);
+    leftChain.setBypassed<ChainPositions::Peak>(chainSettings.peakBypassed);
+    rightChain.setBypassed<ChainPositions::Peak>(chainSettings.peakBypassed);
 
     updateCoefficients(leftChain.get<ChainPositions::Peak>().coefficients, peakCoefficients);
     updateCoefficients(rightChain.get<ChainPositions::Peak>().coefficients, peakCoefficients);
