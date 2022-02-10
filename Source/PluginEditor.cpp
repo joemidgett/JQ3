@@ -23,10 +23,10 @@ void LookAndFeel::drawRotarySlider(juce::Graphics& g,
 
     auto enabled = slider.isEnabled();
 
-    g.setColour(enabled ? Colour(97u, 18u, 167u) : Colours::darkgrey);
+    g.setColour(enabled ? Colour(78u, 42u, 132u) : Colours::darkgrey);
     g.fillEllipse(bounds);
 
-    g.setColour(enabled ? Colour(255u, 154u, 1u) : Colours::grey);
+    g.setColour(enabled ? Colour(216u, 191u, 216u) : Colours::grey);
     g.drawEllipse(bounds, 1.f);
 
     if (auto* rswl = dynamic_cast<RotarySliderWithLabels*>(&slider))
@@ -427,17 +427,17 @@ void ResponseCurveComponent::paint(juce::Graphics& g)
         auto leftChannelFFTPath = leftPathProducer.getPath();
         leftChannelFFTPath.applyTransform(AffineTransform().translation(responseArea.getX(), responseArea.getY()));
 
-        g.setColour(Colours::skyblue);
+        g.setColour(Colour(254u, 78u, 218u)); // Darker value
         g.strokePath(leftChannelFFTPath, PathStrokeType(1.f));
 
         auto rightChannelFFTPath = rightPathProducer.getPath();
         rightChannelFFTPath.applyTransform(AffineTransform().translation(responseArea.getX(), responseArea.getY()));
 
-        g.setColour(Colours::lightyellow);
+        g.setColour(Colour(224u, 176u, 255u)); // Lighter value
         g.strokePath(rightChannelFFTPath, PathStrokeType(1.f));
     }
 
-    g.setColour(Colours::orange);
+    g.setColour(Colour(216u, 191u, 216u));
     g.drawRoundedRectangle(getRenderArea().toFloat(), 4.f, 1.f);
 
     g.setColour(Colours::white);
@@ -631,11 +631,12 @@ JQ3AudioProcessorEditor::JQ3AudioProcessorEditor(JQ3AudioProcessor& p)
     }
 
     peakBypassButton.setLookAndFeel(&lnf);
-    lowcutBypassButton.setLookAndFeel(&lnf);
     highcutBypassButton.setLookAndFeel(&lnf);
+    lowcutBypassButton.setLookAndFeel(&lnf);
     analyzerEnabledButton.setLookAndFeel(&lnf);
 
     auto safePtr = juce::Component::SafePointer<JQ3AudioProcessorEditor>(this);
+    
     peakBypassButton.onClick = [safePtr]()
     {
         if (auto* comp = safePtr.getComponent())
@@ -685,8 +686,8 @@ JQ3AudioProcessorEditor::JQ3AudioProcessorEditor(JQ3AudioProcessor& p)
 JQ3AudioProcessorEditor::~JQ3AudioProcessorEditor()
 {
     peakBypassButton.setLookAndFeel(nullptr);
-    lowcutBypassButton.setLookAndFeel(nullptr);
     highcutBypassButton.setLookAndFeel(nullptr);
+    lowcutBypassButton.setLookAndFeel(nullptr);
     analyzerEnabledButton.setLookAndFeel(nullptr);
 }
 
