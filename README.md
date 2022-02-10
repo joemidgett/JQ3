@@ -1,2 +1,2 @@
 # JQ3
-3-band EQ audio plug-in.
+3-band VST3/AU/Standalone EQ audio plug-in.
