@@ -5,13 +5,43 @@
               companyName="Joe Midgett">
   <MAINGROUP id="nvzyJg" name="JQ3">
     <GROUP id="{67380ACD-07C1-A876-503A-81562B06CDDB}" name="Source">
-      <FILE id="ImnKyc" name="PluginProcessor.cpp" compile="1" resource="0"
-            file="Source/PluginProcessor.cpp"/>
-      <FILE id="mgpRbl" name="PluginProcessor.h" compile="0" resource="0"
-            file="Source/PluginProcessor.h"/>
-      <FILE id="ejfIrp" name="PluginEditor.cpp" compile="1" resource="0"
+      <GROUP id="{6FEA11DF-192B-02A0-F7B1-74BE7094D396}" name="DSP">
+        <FILE id="GYwvMh" name="ChainSettings.cpp" compile="1" resource="0"
+              file="Source/DSP/ChainSettings.cpp"/>
+        <FILE id="nTfJFz" name="ChainSettings.h" compile="0" resource="0" file="Source/DSP/ChainSettings.h"/>
+        <FILE id="nZhNM6" name="FFTDataGenerator.h" compile="0" resource="0"
+              file="Source/DSP/FFTDataGenerator.h"/>
+        <FILE id="ZueFZk" name="Fifo.h" compile="0" resource="0" file="Source/DSP/Fifo.h"/>
+        <FILE id="ENiNam" name="PathProducer.cpp" compile="1" resource="0"
+              file="Source/DSP/PathProducer.cpp"/>
+        <FILE id="HiBBgR" name="PathProducer.h" compile="0" resource="0" file="Source/DSP/PathProducer.h"/>
+        <FILE id="Woa6b5" name="SingleChannelSampleFifo.h" compile="0" resource="0"
+              file="Source/DSP/SingleChannelSampleFifo.h"/>
+      </GROUP>
+      <GROUP id="{628318F6-57CB-68A0-5ACD-ED7A6FA05DF3}" name="GUI">
+        <FILE id="ttV3Ve" name="AnalyzerButton.h" compile="0" resource="0"
+              file="Source/GUI/AnalyzerButton.h"/>
+        <FILE id="rivxPT" name="AnalyzerPathGenerator.h" compile="0" resource="0"
+              file="Source/GUI/AnalyzerPathGenerator.h"/>
+        <FILE id="EodmP6" name="LookAndFeel.cpp" compile="1" resource="0" file="Source/GUI/LookAndFeel.cpp"/>
+        <FILE id="sgTiOQ" name="LookAndFeel.h" compile="0" resource="0" file="Source/GUI/LookAndFeel.h"/>
+        <FILE id="xt2Uao" name="PowerButton.h" compile="0" resource="0" file="Source/GUI/PowerButton.h"/>
+        <FILE id="NXGjn5" name="ResponseCurveComponent.cpp" compile="1" resource="0"
+              file="Source/GUI/ResponseCurveComponent.cpp"/>
+        <FILE id="jjrWqs" name="ResponseCurveComponent.h" compile="0" resource="0"
+              file="Source/GUI/ResponseCurveComponent.h"/>
+        <FILE id="LkmF8C" name="RotarySliderWithLabels.cpp" compile="1" resource="0"
+              file="Source/GUI/RotarySliderWithLabels.cpp"/>
+        <FILE id="iaqByv" name="RotarySliderWithLabels.h" compile="0" resource="0"
+              file="Source/GUI/RotarySliderWithLabels.h"/>
+      </GROUP>
+      <FILE id="rzYKjO" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
-      <FILE id="VNNJbl" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+      <FILE id="o8Sttg" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+      <FILE id="C4WYVH" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="HQOVAw" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
